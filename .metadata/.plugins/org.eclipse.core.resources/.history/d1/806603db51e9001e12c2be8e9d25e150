@@ -1,0 +1,5 @@
+package com.MS.entities;
+
+public class User {
+
+}

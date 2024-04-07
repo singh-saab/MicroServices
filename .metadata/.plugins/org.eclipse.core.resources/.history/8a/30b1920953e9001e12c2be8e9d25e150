@@ -1,0 +1,12 @@
+package com.MS.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.MS.entities.User;
+
+public class UserDao {
+
+	public static List<User>users = new ArrayList();
+	
+}

@@ -1,0 +1,28 @@
+package com.MS.dao;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.MS.entities.User;
+
+public class UserDao {
+
+	public static List<User>users = new ArrayList();
+	public static int userCount=0;
+	
+	static {
+		users.add(new User(++userCount,"Akash",new Date()));
+		users.add(new User(++userCount,"Sahil",new Date()));
+		users.add(new User(++userCount,"Simmi",new Date()));
+	}
+	
+	
+	public List<User>getUsers(){
+		return this.users;
+	}
+	
+	public User getUser(int id) {
+		return users.stream().filter((user)->user.getId()==id).findFirst().orElse(null);
+	}
+}

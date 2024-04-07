@@ -1,0 +1,5 @@
+package com.MS.controllers;
+
+public class UserController {
+
+}

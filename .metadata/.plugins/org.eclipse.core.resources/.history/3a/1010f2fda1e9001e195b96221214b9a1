@@ -1,0 +1,5 @@
+package com.MS.exceptions;
+
+public class UserNotFoundException {
+
+}

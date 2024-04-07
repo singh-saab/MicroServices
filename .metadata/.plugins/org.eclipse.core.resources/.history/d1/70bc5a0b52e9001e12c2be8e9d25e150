@@ -1,0 +1,10 @@
+package com.MS.entities;
+
+import java.time.LocalTime;
+
+public class User {
+	
+	int id;
+	String name;
+	LocalTime birthdate;
+}

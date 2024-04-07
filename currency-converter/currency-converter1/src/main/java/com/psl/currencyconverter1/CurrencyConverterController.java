@@ -1,0 +1,32 @@
+package com.psl.currencyconverter1;
+
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+
+@RestController
+public class CurrencyConverterController {
+
+
+
+    @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConverter convert(@PathVariable String from,
+                                     @PathVariable String to ,
+                                     @PathVariable BigDecimal quantity){
+
+        HashMap<String,String> uriVariables = new HashMap<>();
+        uriVariables.put("from",from);
+        uriVariables.put("to",to);
+        ResponseEntity<CurrencyConverter> response = new RestTemplate().getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConverter.class, uriVariables);
+
+        CurrencyConverter res= response.getBody();
+        res.setTotalCaluculatedAmount(res.getConversionMultiple().multiply(quantity));
+        return res;
+    }
+}

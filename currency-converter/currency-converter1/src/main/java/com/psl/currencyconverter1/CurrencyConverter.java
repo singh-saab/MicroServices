@@ -1,6 +1,6 @@
 package com.psl.currencyconverter1;
 
-import jakarta.persistence.Entity;
+
 import lombok.*;
 
 import java.math.BigDecimal;

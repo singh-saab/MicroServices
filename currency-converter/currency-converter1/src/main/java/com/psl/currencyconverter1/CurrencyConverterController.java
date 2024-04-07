@@ -1,6 +1,7 @@
 package com.psl.currencyconverter1;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,8 @@ import java.util.HashMap;
 @RestController
 public class CurrencyConverterController {
 
-
+    @Autowired
+    private CurrencyExchangeProxy cep;
 
     @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConverter convert(@PathVariable String from,
@@ -28,5 +30,17 @@ public class CurrencyConverterController {
         CurrencyConverter res= response.getBody();
         res.setTotalCaluculatedAmount(res.getConversionMultiple().multiply(quantity));
         return res;
+    }
+
+
+    @GetMapping("/currency-conversion/feign/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConverter convertfromfeign(@PathVariable String from,
+                                     @PathVariable String to ,
+                                     @PathVariable BigDecimal quantity){
+
+        CurrencyConverter exchange = cep.exchange(from, to);
+        exchange.setTotalCaluculatedAmount(exchange.getConversionMultiple().multiply(quantity));
+        return exchange;
+
     }
 }
